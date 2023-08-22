@@ -2,11 +2,11 @@
 
 import SignIn from "./sign-in";
 import Link from "next/link";
-
 import styles from "./navbar.module.css";
 import { useEffect, useState } from "react";
 import { onAuthStateChangedHelper } from "../firebase/firebase";
 import { User } from "firebase/auth";
+import Upload from "./upload";
 
 
 function NavBar() {
@@ -22,7 +22,6 @@ function NavBar() {
     return () => unsubscribe();
   }, [] /* No dependencies, never rerun */);
 
-
   return (
     <nav className={styles.nav}>
       <Link href="/">
@@ -30,9 +29,13 @@ function NavBar() {
           <img className={styles.logo} src="/youtube-logo.svg" alt="YouTube Logo" />
         </span>
       </Link>
+      { 
+        user && <Upload />
+      }
       <SignIn user={user} />
     </nav>
   );
+
 }
 
 export default NavBar;
